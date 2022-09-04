@@ -24,7 +24,7 @@ class QuestionDetailViewTests(TestCase):
     def test_past_question(self):
         past_question = create_question(question_text='Past Question.', days=-5)
         url = reverse('polls:detail', args=(past_question.id,))
-        reponse = self.client.get(url)
+        response = self.client.get(url)
         self.assertContains(response, past_question.question_text) 
 
 
@@ -100,4 +100,4 @@ class QuestionModelTests(TestCase):
     def test_was_published_recently_with_recent_question(self):
         time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
         recent_question = Question(pub_date=time)
-        self.assrtIs(recent_question.was_published_recently(), True)
+        self.assertIs(recent_question.was_published_recently(), True)
